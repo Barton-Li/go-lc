@@ -9,12 +9,7 @@
 
 // @lcpr-template-end
 // @lc code=start
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
+
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -27,27 +22,51 @@ func abs(x int) int {
 	}
 	return x
 }
+
+// kConcatenationMaxSum 计算将数组 arr 重复 k 次后，最大子数组的和。
+// 参数：
+//   arr：原始数组
+//   k：数组重复的次数
+// 返回值：
+//   最大子数组的和，结果取模 1_000_000_007
 func kConcatenationMaxSum(arr []int, k int) int {
+	// 定义常量 mod 用于对结果取模
 	const mod = 1_000_000_007
-	//把arr数组重复k次后 求最大的子数组和
-	//假设2个arr数组的最大子数组和为maxSum，arr数组的元素和为sum，那么最后的答案为max(sum,0) * (k - 2) + maxSum
+
+	// 计算数组 arr 的元素和，并对 mod 取模
 	sum := 0
 	for _, num := range arr {
 		sum = (sum + num) % mod
 	}
+
+	// 如果 k 大于等于 2，则将 arr 数组与其自身连接
 	if k >= 2 {
 		arr = append(arr, arr...)
 	}
-	n, maxSum := len(arr), 0
-	dp := make([]int, n+1)
-	for i := 1; i <= n; i++ {
-		dp[i] = max(dp[i-1]+arr[i-1], arr[i-1])
-		maxSum = max(maxSum, dp[i])
+
+	// 初始化数组长度 n 和最大子数组和 maxSum
+	maxSum, f := 0, 0
+
+	for _, num := range arr {
+		f = max(f, 0) + num
+		maxSum = max(maxSum, f)
 	}
+
+	// 如果 k 不大于 2，直接返回最大子数组和并对 mod 取模
 	if k <= 2 {
 		return maxSum % mod
 	}
+
+	// 根据 sum 和 maxSum 计算最终结果，并对 mod 取模
 	return (max(sum, 0)*(k-2)%mod + maxSum%mod) % mod
+}
+
+// max 返回两个整数中的较大值
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 // @lc code=end

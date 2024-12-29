@@ -69,8 +69,8 @@ func (this *LFUCache) Put(key int, value int) {
         
     }
             
-this.PushFront(entry{key,value,1})
-this.minfreq=1
+    this.PushFront(entry{key,value,1})
+    this.minfreq=1
 }
 
 /**

@@ -18,11 +18,14 @@ func pondSizes(land [][]int) []int {
 		}
 		land[i][j] = 1
 		cnt := 1
+		// 遍历当前位置的周围所有位置
+		// 此循环的目的是探索以(i, j)为中心的3x3网格中的所有相邻位置
 		for x := i - 1; x <= i+1; x++ {
 			for y := j - 1; y <= j+1; y++ {
+				// 对每个相邻位置调用dfs函数
+				// dfs函数用于深度优先搜索，此处调用是为了探索或处理相邻位置
 				cnt += dfs(x, y)
 			}
-
 		}
 		return cnt
 	}

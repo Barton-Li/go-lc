@@ -15,7 +15,7 @@
  *     Val int
  *     Next *ListNode
  * }
- */
+ */0
 func mergeNodes(head *ListNode) *ListNode {
 	tail := head
 	for curr := head.Next; curr.Next != nil; curr = curr.Next {

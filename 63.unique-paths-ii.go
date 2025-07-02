@@ -22,7 +22,7 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
     }
     // 遍历网格的每一行。
     for i := 0; i < n; i++ {
-        // 遍历网格的每一列。
+        // 遍历网格的每一列。qa
         for j := 0; j < m; j++ {
             // 如果当前位置有障碍，则到达该位置的路径数为 0，并继续下一次循环。
             if obstacleGrid[i][j] == 1 {

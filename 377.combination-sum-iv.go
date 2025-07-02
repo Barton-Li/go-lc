@@ -53,24 +53,17 @@
 // Return value:
 //   Returns an integer, representing the number of combinations that sum up to the target.
 func combinationSum4(nums []int, target int) int {
-    // Initialize the dp array with a length of target+1, to accommodate all possible sums from 0 to target.
-    dp := make([]int, target+1)
-    // dp[0] = 1 is the base case, indicating that there is 1 combination for a sum of 0 (i.e., choosing no elements).
-    dp[0] = 1
-
-    // The outer loop iterates through all possible sums from 1 to target.
-    for i := 1; i <= target; i++ {
-        // The inner loop iterates through each element in the nums array.
-        for _, num := range nums {
-            // If the current sum i is greater than or equal to the element num in nums, num can be part of the combination.
-            if i >= num {
-                // Update dp[i], adding the number of combinations ending with num.
-                dp[i] += dp[i-num]
-            }
-        }
-    }
-    // Return the number of combinations for the target sum.
-    return dp[target]
+	// Initialize the dp array with a length of target+1, to accommodate all possible sums from 0 to target.
+	dp := make([]int, target+1)
+	dp[0] = 1
+	for i := 0; i <= target; i++ {
+		for _, num := range nums {
+			if i >= num {
+				dp[i] += dp[i-num]
+			}
+		}
+	}
+	return dp[target]
 }
 
 // @lc code=end
